@@ -1,0 +1,1 @@
+The goal of this init script is to setup the env for windows/linux/mac no matter what I am on to configure my editor how I like it. On windows I set '$env:XDG_CONFIG_HOME = "$HOME/AppData/Local/.config"' so I can use my nvim config files as if I was on linux/unix based OS. 
