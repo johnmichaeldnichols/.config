@@ -29,5 +29,9 @@ vim.cmd [[
   augroup end
 ]]
 
+--nvterm
+--vim.keymap.set('n', '<ALT-{i}>', 'require("nvterm.terminal").toggle "float"')
+
+--set leader to space bar
 vim.keymap.set('n', '<leader>h', ':nohlsearch<CR>')
 

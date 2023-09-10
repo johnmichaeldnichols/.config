@@ -36,38 +36,41 @@ return require('packer').startup(function(use)
       require'mind'.setup()
     end
   }
-  use 'stevearc/dressing.nvim'
-  use 'vimwiki/vimwiki'
   use {
-    'glepnir/dashboard-nvim',
-    event = 'VimEnter',
+    "nvim-neorg/neorg",
     config = function()
-      require('dashboard').setup {
-        theme = 'hyper',
-        shortcut_type = 'number',
-        shortcut = {
-          -- action can be a function type
-          { desc = string, group = 'highlight group', key = 'shortcut key', action = 'action when you press key' },
+      require('neorg').setup {
+        load = {
+          ["core.defaults"] = {}, -- Loads default behaviour
+          ["core.concealer"] = {}, -- Adds pretty icons to your documents
+          ["core.dirman"] = { -- Manages Neorg workspaces
+          config = {
+            workspaces = {
+              notes = "~/notes",
+            },
+          },
         },
-        packages = { enable = true }, -- show how many plugins neovim loaded
-        -- limit how many projects list, action when you press key or enter it will run this action.
-        -- action can be a functino type, e.g.
-        -- action = func(path) vim.cmd('Telescope find_files cwd=' .. path) end
-        project = { enable = true, limit = 8, icon = 'your icon', label = '', action = 'Telescope find_files cwd=' },
-        mru = { limit = 10, icon = 'your icon', label = '', },
-        footer = {}, -- footer
-      }
-    end,
-    requires = {'nvim-tree/nvim-web-devicons'}
-  }
+      },
+    }
+  end,
+  run = ":Neorg sync-parsers",
+  requires = "nvim-lua/plenary.nvim",
+}
+use 'stevearc/dressing.nvim'
+use 'vimwiki/vimwiki'
+use {
+  'NvChad/nvterm',
+  config = function ()
+    require('nvterm').setup()
+  end,
+}
+-- My plugins here
+-- use 'foo1/bar1.nvim'
+-- use 'foo2/bar2.nvim'
 
-  -- My plugins here
-  -- use 'foo1/bar1.nvim'
-  -- use 'foo2/bar2.nvim'
-
-  -- Automatically set up your configuration after cloning packer.nvim
-  -- Put this at the end after all plugins
-  if packer_bootstrap then
-    require('packer').sync()
-  end
-end)
+-- Automatically set up your configuration after cloning packer.nvim
+-- Put this at the end after all plugins
+if packer_bootstrap then
+  require('packer').sync()
+end
+  end)
